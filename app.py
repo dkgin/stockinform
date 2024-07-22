@@ -63,9 +63,9 @@ def sendToLine(lineToken):
 
 #schedule.every(20).seconds.do(sendToLine,lineToken) # 20秒跑一次
 for hour in range(22, 24):
-    schedule.every().day.at(f"{hour:02d}:35").do(sendToLine, lineToken)
+    schedule.every().day.at(f"{hour:02d}:45").do(sendToLine, lineToken)
 for hour in range(22, 24):
-    schedule.every().day.at(f"{hour:02d}:36").do(sendToLine, lineToken)
+    schedule.every().day.at(f"{hour:02d}:46").do(sendToLine, lineToken)
 
 while True:
     schedule.run_pending()
