@@ -4,8 +4,9 @@ from bs4 import BeautifulSoup
 import requests
 import schedule
 import time
+from flask import Flask
 
-
+app = Flask(__name__)
 def stock():
     msg = ['找不到股票資訊']
     try:
@@ -67,7 +68,15 @@ schedule.every().day.at("10:19").do(sendToLine, lineToken)
 
 schedule.every().day.at("10:20").do(sendToLine, lineToken)
 
+@app.route('/')
+def home():
+    return "Stock Notification Service is running."
+
 if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    # 開啟 Flask 服務
+    app.run(host='0.0.0.0', port=port)
+    
     while True:
         schedule.run_pending()
         time.sleep(1)
