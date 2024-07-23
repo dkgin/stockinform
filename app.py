@@ -23,8 +23,19 @@ def stock():
         c = soup.select('.Jc\\(fe\\)')[0].get_text() if soup.select('.Jc\\(fe\\)') else 'N/A'
         s = ''                              # 漲或跌的狀態
         try:
+            main_div = soup.select('#main-0-QuoteHeader-Proxy')[0]
+            if main_div:
+                trend_divs = main_div.select('div.D\\(f\\).Ai\\(fe\\).Mb\\(4px\\)')[0]
+                if any(div.select('.C\\(\\$c-trend-down\\)') for div in trend_divs):
+                    s = '-'
+                else:
+                    s = ''
+        except Exception as e:
+            print(f'Error: {e}')
+            s = 'error'
             # 如果 main-0-QuoteHeader-Proxy id 的 div 裡有 C($c-trend-down) 的 class
             # 表示狀態為下跌
+            '''
             if soup.select('#main-0-QuoteHeader-Proxy')[0].select('.C\\(\\$c-trend-down\\)')[0]:
                 s = '-'
         except:
@@ -36,6 +47,7 @@ def stock():
             except:
                 # 如果都沒有包含，表示平盤
                 s = ''
+            '''
         mod_text = float(s + c[1:-2])
         buy=''
 
