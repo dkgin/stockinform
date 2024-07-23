@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import requests
 import schedule
 import time
+import threading
 from flask import Flask
 
 app = Flask(__name__)
@@ -65,8 +66,12 @@ def sendToLine(lineToken):
 #schedule.every(20).seconds.do(sendToLine,lineToken) # 20秒跑一次
 
 schedule.every().day.at("10:32").do(sendToLine, lineToken)
-
 schedule.every().day.at("10:33").do(sendToLine, lineToken)
+
+def run_schedule():
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
 
 @app.route('/')
 def home():
@@ -74,12 +79,9 @@ def home():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    # 開啟 Flask 服務
+    schedule_thread = threading.Thread(target=run_schedule)
+    schedule_thread.start()
     app.run(host='0.0.0.0', port=port)
-    
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
 
 #if __name__ == "__main__":
     #port = int(os.environ.get("PORT", 5000))
