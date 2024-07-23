@@ -63,14 +63,15 @@ def sendToLine(lineToken):
 
 #schedule.every(20).seconds.do(sendToLine,lineToken) # 20秒跑一次
 
-schedule.every().day.at("09:55").do(sendToLine, lineToken)
+schedule.every().day.at("10:19").do(sendToLine, lineToken)
 
-schedule.every().day.at("09:56").do(sendToLine, lineToken)
-
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+schedule.every().day.at("10:20").do(sendToLine, lineToken)
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+
+#if __name__ == "__main__":
+    #port = int(os.environ.get("PORT", 5000))
+    #app.run(host='0.0.0.0', port=port)
