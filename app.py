@@ -65,8 +65,8 @@ def sendToLine(lineToken):
 
 #schedule.every(20).seconds.do(sendToLine,lineToken) # 20秒跑一次
 
-schedule.every().day.at("19:55").do(sendToLine, lineToken)
-schedule.every().day.at("19:56").do(sendToLine, lineToken)
+schedule.every().day.at("03:00").do(sendToLine, lineToken)
+schedule.every().day.at("03:01").do(sendToLine, lineToken)
 
 def run_schedule():
     while True:
