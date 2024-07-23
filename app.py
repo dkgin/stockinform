@@ -70,3 +70,6 @@ schedule.every().day.at("09:44").do(sendToLine, lineToken)
 while True:
     schedule.run_pending()
     time.sleep(1)
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
