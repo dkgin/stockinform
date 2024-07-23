@@ -64,9 +64,9 @@ def sendToLine(lineToken):
 
 #schedule.every(20).seconds.do(sendToLine,lineToken) # 20秒跑一次
 
-schedule.every().day.at("10:26").do(sendToLine, lineToken)
+schedule.every().day.at("10:32").do(sendToLine, lineToken)
 
-schedule.every().day.at("10:27").do(sendToLine, lineToken)
+schedule.every().day.at("10:33").do(sendToLine, lineToken)
 
 @app.route('/')
 def home():
